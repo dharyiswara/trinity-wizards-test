@@ -72,8 +72,12 @@ class EditContactActivity : AppCompatActivity() {
                 etFirstName.setText(userContact?.firstname)
                 etLastName.setText(userContact?.lastname)
                 etEmail.setText(userContact?.email)
-                val dob = dateFormat.parse(userContact?.dob.orEmpty())
-                    ?.let { date -> datePickerFormat.format(date) }
+                val dob = try {
+                    dateFormat.parse(userContact?.dob.orEmpty())
+                        ?.let { date -> datePickerFormat.format(date) }
+                } catch (e: Exception) {
+                    ""
+                }
                 etDob.setText(dob)
             }
             etDob.setOnClickListener {
