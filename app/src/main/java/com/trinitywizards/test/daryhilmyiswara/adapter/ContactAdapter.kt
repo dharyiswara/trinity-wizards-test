@@ -9,8 +9,8 @@ import com.trinitywizards.test.daryhilmyiswara.model.UserContact
 
 class ContactAdapter : RecyclerView.Adapter<ContactViewHolder>() {
 
-    private var listGames = listOf<UserContact>()
-    private var clickListener: (UserContact) -> Unit = {}
+    private var listContact = mutableListOf<UserContact>()
+    private var clickListener: ((UserContact, Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val binding = ItemListContactBinding.inflate(
@@ -20,17 +20,23 @@ class ContactAdapter : RecyclerView.Adapter<ContactViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        holder.bind(listGames[position])
+        holder.bind(listContact[position])
     }
 
-    override fun getItemCount(): Int = listGames.size
+    override fun getItemCount(): Int = listContact.size
 
-    fun updateListGames(list: List<UserContact>) {
-        listGames = list
+    fun updateListContact(list: List<UserContact>) {
+        listContact.clear()
+        listContact.addAll(list)
         notifyDataSetChanged()
     }
 
-    fun setOnClickListener(listener: (UserContact) -> Unit) {
+    fun updateContact(userContact: UserContact, position: Int) {
+        listContact[position] = userContact
+        notifyItemChanged(position)
+    }
+
+    fun setOnClickListener(listener: (UserContact, Int) -> Unit) {
         clickListener = listener
     }
 

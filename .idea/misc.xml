@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProject/trinity-wizards-test/app/src/main/res/drawable/bg_stroke_grey.xml" value="0.123" />
+        <entry key="..\:/AndroidProject/trinity-wizards-test/app/src/main/res/drawable/ic_calendar.xml" value="0.13" />
+        <entry key="..\:/AndroidProject/trinity-wizards-test/app/src/main/res/layout/activity_edit_contact.xml" value="0.2" />
         <entry key="..\:/AndroidProject/trinity-wizards-test/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/AndroidProject/trinity-wizards-test/app/src/main/res/layout/item_list_contact.xml" value="0.2076923076923077" />
       </map>
