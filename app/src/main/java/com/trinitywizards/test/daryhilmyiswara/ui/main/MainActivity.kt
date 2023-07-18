@@ -3,6 +3,7 @@ package com.trinitywizards.test.daryhilmyiswara.ui.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trinitywizards.test.daryhilmyiswara.adapter.ContactAdapter
@@ -51,6 +52,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.swContact.setOnRefreshListener {
             viewModel.getContactList(this)
+        }
+
+        binding.ivAdd.setOnClickListener {
+            Toast.makeText(this, "Add Contact", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.ivSearch.setOnClickListener {
+            Toast.makeText(this, "Search Contact", Toast.LENGTH_SHORT).show()
         }
     }
 
