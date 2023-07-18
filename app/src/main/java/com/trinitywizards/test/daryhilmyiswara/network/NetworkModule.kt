@@ -1,6 +1,7 @@
 package com.trinitywizards.test.daryhilmyiswara.network
 
 import androidx.viewbinding.BuildConfig
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,40 +15,12 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
-    private val retrofitProvider by lazy {
-        RetrofitProvider(getOkHttpClient())
+    private val gson by lazy {
+        Gson()
     }
 
     @Provides
-    fun provideApiService(): ApiService {
-        return retrofitProvider.getApiService()
+    fun provideGson(): Gson {
+        return gson
     }
-
-    private fun getOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().apply {
-            if (BuildConfig.DEBUG) {
-                addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            }
-            addInterceptor(createRequestInterceptor())
-            readTimeout(30, TimeUnit.SECONDS)
-        }.build()
-    }
-
-    private fun createRequestInterceptor(): Interceptor {
-        return Interceptor { chain ->
-            val original = chain.request()
-
-            val requestBuilder = original.newBuilder()
-                .header("accept", "application/json")
-
-            val modifiedUrl = original.url.newBuilder()
-                .build()
-
-            val request = requestBuilder.url(modifiedUrl)
-                .build()
-
-            return@Interceptor chain.proceed(request)
-        }
-    }
-
 }
