@@ -48,10 +48,15 @@ class MainActivity : AppCompatActivity() {
             }
             addItemDecoration(SpaceItemDecoration(16))
         }
+
+        binding.swContact.setOnRefreshListener {
+            viewModel.getContactList(this)
+        }
     }
 
     private fun subscribeToLiveData() {
         viewModel.getContactListLiveData().observe(this) {
+            binding.swContact.isRefreshing = false
             contactAdapter.updateListContact(it)
         }
     }
